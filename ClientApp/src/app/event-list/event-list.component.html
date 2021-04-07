@@ -1,0 +1,25 @@
+<h1 id="tableLabel">Datafordeler Events</h1>
+
+<p>A list of events received from datafordeler.</p>
+
+<p *ngIf="!DAFEvents"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="DAFEvents">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>EventID</th>
+      <th>Observations</th>
+      <th>Happened at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let DAFEvent of DAFEvents">
+      <td><a [title]="'Go to eventID '+DAFEvent.id" [routerLink]="['/event-inspection', DAFEvent.id]">{{ DAFEvent.id }} </a></td>
+      
+      <td>{{ DAFEvent.eventID }}</td>
+      <td>{{ DAFEvent.dafEventHistory.length }}</td>
+      <td>{{ DAFEvent.dafEventHistory[0].time }}</td>
+    </tr>
+  </tbody>
+</table>

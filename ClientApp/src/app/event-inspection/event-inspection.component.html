@@ -1,0 +1,14 @@
+<h1 id="tableLabel">Datafordeler Event inspector</h1>
+<p *ngIf="!DAFEvent"><em>Loading...</em></p>
+<div *ngIf="DAFEvent">
+  <p>Internal ID: {{ DAFEvent.id }}</p>
+  <p>Datafordeler ID: {{ DAFEvent.eventID }}</p>
+  <p>Amount of observations: {{ DAFEvent.dafEventHistory.length }}</p>
+  <div *ngFor="let History of DAFEvent.dafEventHistory">
+    <h2>Observation at {{ History.time }}</h2>
+    <p>Type {{ History.rawFormat }}</p>
+    <pre>{{History.rawBody | json}}</pre>
+  </div>
+</div>
+
+
