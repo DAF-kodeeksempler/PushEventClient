@@ -7,6 +7,7 @@
   <div *ngFor="let History of DAFEvent.dafEventHistory">
     <h2>Observation at {{ History.time }}</h2>
     <p>Type {{ History.rawFormat }}</p>
+    <p>IP {{ History.ip }}</p>
     <pre>{{History.rawBody | json}}</pre>
   </div>
 </div>

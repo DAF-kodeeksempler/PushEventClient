@@ -51,13 +51,16 @@ namespace PushEventClient.Controllers
                 eventAction = EventAction.PUSH_RESEND;
             }
 
+            var ip = this.HttpContext.Connection.RemoteIpAddress.ToString();
+
             var DAFEventHistory = new DAFEventHistory()
             {
                 DAFEvent = DAFEvent,
                 Action = eventAction,
                 RawBody = entity.Body,
                 RawFormat = entity.Format,
-                Time = DateTime.Now
+                Time = DateTime.Now,
+                IP = ip
             };
             await _db.DAFEventHistory.AddAsync(DAFEventHistory);
 

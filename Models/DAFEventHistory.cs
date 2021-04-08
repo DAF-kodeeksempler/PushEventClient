@@ -31,5 +31,6 @@ namespace PushEventClient.Model
         public string RawBody { get; set; }
         public string RawFormat { get; set; }
         public EventAction Action { get; set; }
+        public string IP { get; set; }
     }
 }
