@@ -10,7 +10,7 @@ export class EventList {
   public DAFEvents: DAFEvent[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<DAFEvent[]>(baseUrl + 'api/DAFevent').subscribe(result => {
+    http.get<DAFEvent[]>(baseUrl + 'api/DAFevent/list').subscribe(result => {
       this.DAFEvents = result;
       console.log("Got result!");
     }, error => console.error(error));

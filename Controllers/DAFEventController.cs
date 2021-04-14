@@ -25,9 +25,16 @@ namespace PushEventClient.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<DAFEvent> Get()
+        [Route("list")]
+        public IEnumerable<DAFEvent> GetList(int pagesize = 100, int page = 0)
         {
-            var ret = _db.DAFEvent.Include(e => e.DAFEventHistory).AsNoTrackingWithIdentityResolution().ToList();
+            var ret = _db.DAFEvent.Include(e => e.DAFEventHistory)
+                .AsNoTrackingWithIdentityResolution()
+                .OrderBy(e => e.Id)
+                .Reverse()
+                .Skip(pagesize*page)
+                .Take(pagesize)
+                .ToList();
             return ret;
         }
         [HttpGet]
