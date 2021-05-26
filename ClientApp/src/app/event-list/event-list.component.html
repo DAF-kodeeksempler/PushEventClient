@@ -2,7 +2,10 @@
 
 <p>A list of events received from datafordeler.</p>
 
-<p *ngIf="!DAFEvents"><em>Loading...</em></p>
+<div class="has-text-centered">
+  <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+  <div *ngIf="loading"  class="spinner">Loading</div>
+</div>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="DAFEvents">
   <thead>
@@ -13,13 +16,16 @@
       <th>Happened at</th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let DAFEvent of DAFEvents">
+  <tbody *ngIf="DAFEvents" >
+    <tr *ngFor="let DAFEvent of DAFEvents | paginate: { id: 'server', itemsPerPage: pagesize, currentPage: pagenumber, totalItems: total }">
       <td><a [title]="'Go to eventID '+DAFEvent.id" [routerLink]="['/event-inspection', DAFEvent.id]">{{ DAFEvent.id }} </a></td>
-      
+
       <td>{{ DAFEvent.eventID }}</td>
       <td>{{ DAFEvent.dafEventHistory.length }}</td>
       <td>{{ DAFEvent.dafEventHistory[0].time }}</td>
     </tr>
   </tbody>
 </table>
+<div class="has-text-centered">
+  <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+</div>

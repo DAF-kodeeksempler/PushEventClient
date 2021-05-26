@@ -1,7 +1,14 @@
+export interface DAFEventCollection {
+    total: number;
+    pagesize: number;
+    pagenumber: number;
+    dafEvents: DAFEvent[];
+}
+
 export interface DAFEvent {
     id: number;
     eventID: number;
-    dafEventHistory: DAFEventHistory[]; 
+    dafEventHistory: DAFEventHistory[];
 }
 
 export interface DAFEventHistory {
@@ -9,5 +16,5 @@ export interface DAFEventHistory {
     action: number;
     time: Date;
     rawFormat:string;
-    rawBody:string; 
+    rawBody:string;
 }

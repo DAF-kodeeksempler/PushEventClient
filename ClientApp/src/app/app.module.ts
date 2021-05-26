@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { EventList } from './event-list/event-list.component';
 import { EventInspection } from './event-inspection/event-inspection.component';
 
+import {NgxPaginationModule} from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,7 @@ import { EventInspection } from './event-inspection/event-inspection.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'event-list', component: EventList },

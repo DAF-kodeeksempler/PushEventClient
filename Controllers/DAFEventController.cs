@@ -26,15 +26,20 @@ namespace PushEventClient.Controllers
 
         [HttpGet]
         [Route("list")]
-        public IEnumerable<DAFEvent> GetList(int pagesize = 100, int page = 0)
+        public DAFEventCollection GetList(int pagesize = 100, int pagenumber = 0)
         {
-            var ret = _db.DAFEvent.Include(e => e.DAFEventHistory)
+            var data = _db.DAFEvent.Include(e => e.DAFEventHistory)
                 .AsNoTrackingWithIdentityResolution()
                 .OrderBy(e => e.Id)
                 .Reverse()
-                .Skip(pagesize*page)
+                .Skip(pagesize*pagenumber)
                 .Take(pagesize)
                 .ToList();
+            var ret = new DAFEventCollection();
+            ret.DAFEvents = data;
+            ret.pagesize = pagesize;
+            ret.pagenumber = pagenumber;
+            ret.total = _db.DAFEvent.Count();
             return ret;
         }
         [HttpGet]
