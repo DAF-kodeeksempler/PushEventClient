@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using PushEventClient.Database;
@@ -33,6 +33,10 @@ namespace PushEventClient.Controllers
                 return BadRequest(ModelState);
             }
 
+            // We use a database transaction as an atomic lock, since sqlite uses fully atomic transactions.
+            // Replace this with something granular/smarter, if using another database
+            using (var transaction = _db.Database.BeginTransaction())
+            {
             // If this is an override of the event, we handle it like that
             var DAFEvent = _db.DAFEvent.Where(s => s.EventID == entity.Id).FirstOrDefault();
             EventAction eventAction;
@@ -44,7 +48,7 @@ namespace PushEventClient.Controllers
                     EventID = entity.Id
                 };
                 eventAction = EventAction.PUSH_CREATE;
-                await _db.DAFEvent.AddAsync(DAFEvent);
+                    _db.DAFEvent.Add(DAFEvent);
             }
             else
             {
@@ -62,9 +66,11 @@ namespace PushEventClient.Controllers
                 Time = DateTime.Now,
                 IP = ip
             };
-            await _db.DAFEventHistory.AddAsync(DAFEventHistory);
+                _db.DAFEventHistory.Add(DAFEventHistory);
+                _db.SaveChanges();
+                transaction.Commit();
+            }
 
-            await _db.SaveChangesAsync();
             return Created(entity);
         }
     }
