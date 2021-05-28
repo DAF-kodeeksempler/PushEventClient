@@ -57,12 +57,24 @@ namespace PushEventClient.Controllers
 
             var ip = this.HttpContext.Connection.RemoteIpAddress.ToString();
 
+                var format = EventFormat.UNDEFINED;
+
+                if(entity.Format == "JSON"){
+                    format = EventFormat.JSON;
+
+                }
+                if(entity.Format == "XML"){
+                    format = EventFormat.XML;
+
+                }
+
             var DAFEventHistory = new DAFEventHistory()
             {
                 DAFEvent = DAFEvent,
                 Action = eventAction,
                 RawBody = entity.Body,
                 RawFormat = entity.Format,
+                    Format = format,
                 Time = DateTime.Now,
                 IP = ip
             };

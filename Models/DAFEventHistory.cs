@@ -24,12 +24,20 @@ namespace PushEventClient.Model
             PUSH_RESEND
         }
 
+        public enum EventFormat
+        {
+            XML,
+            JSON,
+            UNDEFINED
+        }
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime Time { get; set; }
         public DAFEvent DAFEvent { get; set; }
         public string RawBody { get; set; }
         public string RawFormat { get; set; }
+        public EventFormat Format { get; set; }
         public EventAction Action { get; set; }
         public string IP { get; set; }
     }
