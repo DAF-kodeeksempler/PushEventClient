@@ -28,11 +28,11 @@ namespace PushEventClient
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             //LOOK: Notice that we add the odata services here
             services.AddOData();
             services.AddODataQueryFilter();
-            
+
             // Set serialization of json files to ignore refferences, so we don't get
             // into a recursion loop.
             services.AddControllersWithViews().AddNewtonsoftJson(opt =>
@@ -74,7 +74,7 @@ namespace PushEventClient
             {
                 app.UseSpaStaticFiles();
             }
-            
+
             // LOOK: We use odata routing also
             app.UseODataBatching();
             app.UseRouting();
@@ -89,7 +89,7 @@ namespace PushEventClient
             app.UseMvc(routeBuilder =>
             {
                 routeBuilder.Select().Filter();
-                routeBuilder.MapODataServiceRoute("odata", "odata", model: GetEdmModel(), batchHandler: odataBatchHandler);
+                routeBuilder.MapODataServiceRoute("odata", "odata/{odataMetadata}", model: GetEdmModel(), batchHandler: odataBatchHandler);
             });
 
             app.UseEndpoints(endpoints =>

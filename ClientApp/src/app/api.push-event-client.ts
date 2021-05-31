@@ -13,8 +13,12 @@ export interface DAFEvent {
 
 export interface DAFEventHistory {
     id: number;
-    action: number;
     time: Date;
-    rawFormat:string;
     rawBody:string;
+    rawFormat:string;
+    odataMetadata:string;
+    action: number;
+    format: number;
+    IP:string;
+
 }

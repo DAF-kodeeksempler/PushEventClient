@@ -19,14 +19,22 @@ Der er også inkluderet launch filer til vscode.
   * Det kan betale sig at tilføje og fjerne dem, når man debugger.
 
 
+## Odata endpoint
+Odata endpointet er:
+```
+https://dit.domæne.dk/odata/<Metainformation til tracking>/
+```
+
 ## SSL
 Der bruges en ```.pfx``` fil. Den kan genereres af openssl via følgene kommando:
 
 ```
-openssl pkcs12 -export -out ssl2.pfx -inkey ???.key -in ???.pem
+openssl pkcs12 -export -out ssl.pfx -inkey ???.key -in ???.pem
 ```
 
-```*.key``` er SSL privatnøglen, og ```*.pem``` filen er certifikatfilen. 
+```*.key``` er SSL privatnøglen, og ```*.pem``` filen er certifikatfilen.
+
+Nøglen du sætter her. Den skal bruges af ```Program.cs```, når kerstel skal have certifikatet
 
 ### Todo
 * Valider om data faktisk er fra datafordeleren

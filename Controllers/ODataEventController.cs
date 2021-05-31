@@ -26,7 +26,7 @@ namespace PushEventClient.Controllers
         }
 
         [ODataRoute()]
-        public async Task<IActionResult> Post([FromBody] Event entity)
+        public async Task<IActionResult> Post([FromBody] Event entity, [FromRoute] string odataMetadata)
         {
             if (!ModelState.IsValid)
             {
@@ -74,8 +74,9 @@ namespace PushEventClient.Controllers
                 Action = eventAction,
                 RawBody = entity.Body,
                 RawFormat = entity.Format,
-                    Format = format,
+                Format = format,
                 Time = DateTime.Now,
+                OdataMetadata = odataMetadata,
                 IP = ip
             };
                 _db.DAFEventHistory.Add(DAFEventHistory);

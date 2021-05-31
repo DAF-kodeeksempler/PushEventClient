@@ -5,9 +5,13 @@
   <p>Datafordeler ID: {{ DAFEvent.eventID }}</p>
   <p>Amount of observations: {{ DAFEvent.dafEventHistory.length }}</p>
   <div *ngFor="let History of DAFEvent.dafEventHistory">
-    <h2>Observation at {{ History.time }}</h2>
-    <p>Type {{ History.rawFormat }}</p>
+    <hr>
+    <h3>Time {{ History.time }}</h3>
+    <p>Raw Type: {{ History.rawFormat }}</p>
     <p>IP {{ History.ip }}</p>
+    <h3>Metadata</h3>
+    <pre>{{History.odataMetadata | json}}</pre>
+    <h3>Data</h3>
     <pre>{{History.rawBody | json}}</pre>
   </div>
 </div>
